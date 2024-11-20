@@ -3,15 +3,25 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	types "github.com/Glicio/go-api-gemini/api/types"
 	"net/http"
+
+	types "github.com/Glicio/go-api-gemini/api/types"
+	"github.com/Glicio/go-api-gemini/internal/database"
+	"github.com/Glicio/go-api-gemini/internal/database/queries"
 )
 
 func Api(w http.ResponseWriter, r *http.Request) {
 
 	if r.Method == "GET" {
-		w.WriteHeader(http.StatusBadRequest)
-		w.Write([]byte("GET not allowed"))
+		w.Header().Set("Content-Type", "application/json")
+    //blocking shit i gess...
+		posts, err := queries.GetPosts(database.Conn)
+		if err != nil {
+			fmt.Fprintf(w, "Error getting posts: %v", err)
+			return
+		}
+		fmt.Println("sending posts")
+		json.NewEncoder(w).Encode(posts)
 		return
 	}
 	//parse the request body
@@ -27,11 +37,18 @@ func Api(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if key == "secret" {
-    fmt.Println("secret")
-		var res types.Response = types.Response{Message: "A Torre Eiffel ilumina à noite, com milhares de luzes cintilando, criando um espetáculo mágico em Paris.", Status: "OK"}
-    w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(res)
+		fmt.Println("Right key")
+		w.Header().Set("Content-Type", "application/json")
+    //blocking shit i gess...
+		posts, err := queries.GetPosts(database.Conn)
+		if err != nil {
+			fmt.Fprintf(w, "Error getting posts: %v", err)
+			return
+		}
+		fmt.Println("sending posts")
+		json.NewEncoder(w).Encode(posts)
 		return
+
 	}
 
 	if err != nil {
