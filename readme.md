@@ -6,8 +6,14 @@ O projeto da Alura usa JavaScript e MongoDB, mas estou utilizando Go para tentar
 
 ## Como rodar
 
-1. Crie um arquivo .env com as seguintes variáveis
+1. Clone o projeto 
+    `git clone gh repo clone Glicio/Imersao-backend-alura-2024`
+    ou 
+    `gh repo clone Glicio/Imersao-backend-alura-2024`
 
+2. Crie um arquivo .env com as seguintes variáveis na raiz do projeto
+
+exemplo:
 ```
 DB_HOST=localhost
 DB_PORT=5432
@@ -16,11 +22,13 @@ DB_PASSWORD=postgres
 DB_NAME=postgres
 ```
 
-2. Rode o comando `go run cmd/service/main.go`
+3. Rode o comando `go mod download` e `go mod tidy` para baixar as dependências
 
-3. Acesse a api em `http://localhost:3000/api`
+4. Rode o comando `go run cmd/service/main.go`
 
-4. Para testar a api, use o comando `curl -X POST -H "Content-Type: application/json" -d '{"key": "secret"}' http://localhost:3000/api`
+5. Acesse a api em `http://localhost:3000/api`
+
+6. Para testar a api, use o comando `curl -X POST -H "Content-Type: application/json" -d '{"key": "secret"}' http://localhost:3000/api`
 
 
 ## Aula 4: Implementando Armazenamento e Upload de Imagens
