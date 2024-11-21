@@ -1,7 +1,9 @@
 package api
 
+//post creation request
 type Request struct {
-	Message string `json:"message"`
-  //optional key
   Key string `json:"key,omitempty"`
+  Descricao string `json:"descricao,omitempty"`
+  Src string `json:"src,omitempty"`
+	Alt string `json:"alt,omitempty"`
 }
