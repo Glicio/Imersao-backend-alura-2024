@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link href="css/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <h3>GATOS</h3>
+
+    <form
+      action="upload"
+      style="
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: min-content;
+        gap: 10px;
+      "
+    >
+      <input type="file" name="image" accept="image/*" />
+      <input type="text" name="descricao" placeholder="Descrição" />
+      <input type="text" name="src" placeholder="Src" />
+      <input type="text" name="alt" placeholder="Alt" />
+      <input type="submit" value="Enviar" />
+    </form>
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        console.log(formData);
+        fetch("/upload", {
+          method: "POST",
+          body: formData,
+        }).then((res) => {
+          console.log(res);
+        });
+      });
+    </script>
+  </body>
+</html>
