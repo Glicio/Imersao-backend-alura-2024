@@ -1,6 +1,7 @@
 package mutations
 
 import (
+	types "github.com/Glicio/go-api-gemini/api/types"
 	"github.com/jackc/pgx"
 )
 
@@ -10,15 +11,15 @@ type CreatePostInput struct {
 	Alt       string `json:"alt"`
 }
 
-func CreatePost(conn *pgx.Conn, input CreatePostInput) (int64, error) {
+func CreatePost(conn *pgx.Conn, input CreatePostInput) (types.Post, error) {
 	descricao := input.Descricao
 	src := input.Src
 	alt := input.Alt
 
-	var id int64
-	err := conn.QueryRow("INSERT INTO posts (descricao, src, alt) VALUES ($1, $2, $3) RETURNING id", descricao, src, alt).Scan(&id)
+	var newPost types.Post
+	err := conn.QueryRow("INSERT INTO posts (descricao, src, alt) VALUES ($1, $2, $3) RETURNING *", descricao, src, alt).Scan(&newPost.Id, &newPost.Descricao, &newPost.Src, &newPost.Alt)
 	if err != nil {
-		return 0, err
+		return newPost, err
 	}
-	return id, nil
+	return newPost, nil
 }
