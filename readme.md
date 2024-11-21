@@ -26,10 +26,9 @@ DB_NAME=postgres
 
 4. Rode o comando `go run cmd/service/main.go`
 
-5. Acesse a api em `http://localhost:3000/api`
+5. Acesse a api em `http://localhost:3000/post`
 
-6. Para testar a api, use o comando `curl -X POST -H "Content-Type: application/json" -d '{"key": "secret"}' http://localhost:3000/api`
-
+6. Acesse a pagina de upload em `http://localhost:3000/
 
 ## Aula 4: Implementando Armazenamento e Upload de Imagens
 
