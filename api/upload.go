@@ -3,13 +3,12 @@ package api
 import (
 	"encoding/json"
 	"fmt"
-	"io"
-	"net/http"
-	"os"
-
 	"github.com/Glicio/go-api-gemini/internal/database"
 	"github.com/Glicio/go-api-gemini/internal/database/mutations"
 	"github.com/Glicio/go-api-gemini/services"
+	"io"
+	"net/http"
+	"os"
 )
 
 type UploadRequest struct {
@@ -20,6 +19,18 @@ type UploadRequest struct {
 }
 
 func Upload(w http.ResponseWriter, r *http.Request) {
+
+	if r.Method == "GET" {
+		pwd, err := os.Getwd()
+		if err != nil {
+			fmt.Println("Error getting pwd:", err)
+		}
+		var path = pwd + "/www/index.html"
+		fmt.Println("Serving file:", path)
+		http.ServeFile(w, r, path)
+		return
+	}
+
 	err := r.ParseMultipartForm(32 << 20) // 32 MB
 	if err != nil {
 		fmt.Println("Error getting multipart reader:", err)
@@ -74,11 +85,11 @@ func Upload(w http.ResponseWriter, r *http.Request) {
 	}
 	defer out.Close()
 
-  file.Seek(0, 0)
-  b, err := io.ReadAll(file)
+	file.Seek(0, 0)
+	b, err := io.ReadAll(file)
 
-  altText := services.GenerateAltFromImage(b, ext)
-  desc := services.GenerateDescriptionFromImage(b, ext)
+	altText := services.GenerateAltFromImage(b, ext)
+	desc := services.GenerateDescriptionFromImage(b, ext)
 	fmt.Println("File uploaded successfully:", handler.Filename)
 	var newPost = mutations.CreatePostInput{
 		Descricao: desc,

@@ -9,6 +9,7 @@ import (
 	"github.com/Glicio/go-api-gemini/internal/database"
 	"github.com/Glicio/go-api-gemini/internal/database/mutations"
 	"github.com/Glicio/go-api-gemini/internal/database/queries"
+	"github.com/Glicio/go-api-gemini/utils"
 )
 
 /**
@@ -26,8 +27,16 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "Error getting posts: %v", err)
 			return
 		}
+    var postList []types.Post
+    for _, post := range posts {
+      postList = append(postList, types.Post{
+        Descricao: post.Descricao,
+        Alt: post.Alt,
+        Src: utils.RemovePrefix(post.Src, "/home/glicio/projects/go/api2"),
+      })
+    }
 		fmt.Println("sending posts")
-		json.NewEncoder(w).Encode(posts)
+		json.NewEncoder(w).Encode(postList)
 		return
 	}
   

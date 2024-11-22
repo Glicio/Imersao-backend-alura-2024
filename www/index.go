@@ -11,7 +11,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
   if err != nil {
     fmt.Println("Error getting pwd:", err)
   }
-  var path = pwd + "/www/index.html"
+  var path = pwd + "/static/index.html"
   fmt.Println("Serving file:", path)
   http.ServeFile(w, r, path)
 }
