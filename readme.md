@@ -7,7 +7,7 @@ O projeto da Alura usa JavaScript e MongoDB, mas estou utilizando Go para tentar
 ## Como rodar
 
 1. Clone o projeto 
-    `git clone gh repo clone Glicio/Imersao-backend-alura-2024`
+    `git clone https://github.com/Glicio/Imersao-backend-alura-2024.git`
     ou 
     `gh repo clone Glicio/Imersao-backend-alura-2024`
 
