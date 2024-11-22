@@ -30,6 +30,24 @@ func Posts(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(posts)
 		return
 	}
+  
+  if r.Method == "PUT" {
+    w.Header().Set("Content-Type", "application/json")
+    var toUpdate mutations.UpdatePostInput
+    err := json.NewDecoder(r.Body).Decode(&toUpdate)
+    if err != nil {
+      fmt.Fprintf(w, "Error decoding request body: %v", err)
+      return
+    }
+    updatedPost, err := mutations.UpdatePost(database.Conn, toUpdate)
+    if err != nil {
+      fmt.Fprintf(w, "Error updating post: %v", err)
+      return
+    }
+    json.NewEncoder(w).Encode(updatedPost)
+    return
+  }
+
 	//parse the request body
 	var novoPost types.Request
 	err := json.NewDecoder(r.Body).Decode(&novoPost)

@@ -11,6 +11,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", www.Index)
+  http.HandleFunc("/static/", www.Static)
   http.HandleFunc("/posts", api.Posts)
   http.HandleFunc("/upload", api.Upload)
   database.Init()
