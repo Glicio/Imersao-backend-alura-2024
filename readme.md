@@ -13,13 +13,13 @@ O projeto da Alura usa JavaScript e MongoDB, mas estou utilizando Go para tentar
 
 2. Crie um arquivo .env com as seguintes variáveis na raiz do projeto
 
-exemplo:
 ```
 DB_HOST=localhost
 DB_PORT=5432
 DB_USER=postgres
 DB_PASSWORD=postgres
 DB_NAME=postgres
+GEMINI_API_KEY={sua chave}
 ```
 
 3. Rode o comando `go mod download` e `go mod tidy` para baixar as dependências
