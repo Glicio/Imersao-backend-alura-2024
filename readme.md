@@ -28,7 +28,9 @@ DB_NAME=postgres
 
 5. Acesse a api em `http://localhost:3000/post`
 
-6. Acesse a pagina de upload em `http://localhost:3000/
+6. Acesse a página inicial em `http://localhost:3000/`
+
+7. Acesse a pagina de upload em `http://localhost:3000/upload`
 
 ## Aula 4: Implementando Armazenamento e Upload de Imagens
 
